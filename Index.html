@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lar de Idosos São João</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 28px;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    p {
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .banner {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .address {
+      margin-bottom: 10px;
+    }
+
+    .chat {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .chat p {
+      color: #999;
+      font-size: 16px;
+    }
+
+    .chat a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #chat-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    #chat-log {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      animation: scrollAnimation 0.3s linear forwards;
+    }
+    .user-message, .bot-message {
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .user-message {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+    .bot-message {
+      background-color: #007bff;
+      color: #fff;
+      text-align: right;
+    }
+    .chat-input {
+      display: flex;
+      margin-top: 10px;
+    }
+    .chat-input input[type="text"] {
+      flex: 1;
+      padding: 5px;
+    }
+    .chat-input button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    @keyframes scrollAnimation {
+      100% {
+        scroll-behavior: smooth;
+        scroll-margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const chatContainer = document.getElementById('chat-container');
+          const chatLog = document.getElementById('chat-log');
+          const userInput = document.getElementById('user-input');
+          const sendBtn = document.getElementById('send-btn');
+    
+          function appendUserMessage(message) {
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.textContent = message;
+            chatLog.appendChild(userMessage);
+            scrollToBottom();
+          }
+    
+          function appendBotMessage(message) {
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = message;
+            chatLog.appendChild(botMessage);
+            scrollToBottom();
+          }
+    
+          function scrollToBottom() {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+    
+          sendBtn.addEventListener('click', function() {
+            sendMessage();
+          });
+    
+          userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+              sendMessage();
+            }
+          });
+    
+          function sendMessage() {
+            const userMessage = userInput.value;
+            if (userMessage.trim() !== '') {
+              appendUserMessage(userMessage);
+              const botResponse = getBotResponse(userMessage);
+              setTimeout(function() {
+                appendBotMessage(botResponse);
+              }, 500);
+              userInput.value = '';
+            }
+          }
+    
+          function getBotResponse(userMessage) {
+            const responses = {
+              'Olá' : 'Olá! Como posso ajudar?',
+              'Qual é o seu nome?': 'Eusou um chatbot!',
+              'Como você está?': 'Estou bem, obrigado!',
+              'Tchau': 'Até logo! Espero ter ajudado!'
+            };
+    
+            return responses[userMessage] || 'Desculpe, não entendi. Pode reformular sua pergunta?';
+          }
+        });
+      </script>
+  <header>
+    <h1>Lar de Idosos São João</h1>
+  </header>
+
+  <main>
+    <img class="banner" src="download (4).jfif" alt="Banner do Lar de Idosos São João">
+
+    <p>Bem-vindo(a) ao Lar de Idosos São João, um lugar acolhedor e seguro para nossos queridos idosos.</p>
+
+    <h2>Informações Gerais</h2>
+    <p>Oferecemos cuidados personalizados, alimentação balanceada e atividades recreativas para promover o bem-estar dos residentes.</p>
+
+    <h2>Endereços</h2>
+    <div class="address">
+      <p>Unidade 1:</p>
+      <p>Rua Principal, 123 - Centro</p>
+      <p>Telefone: (11) 1234-5678</p>
+    </div>
+    <div class="address">
+      <p>Unidade 2:</p>
+      <p>Avenida Central, 456 - Bairro Novo</p>
+      <p>Telefone: (11) 8765-4321</p>
+    </div>
+
+    <div class="chat">
+      <h2>Fale Conosco</h2>
+      <p>Tire suas dúvidas com nossa equipe:</p>
+     
+      <div id="chat-container">
+        <div id="chat-log"></div>
+        <div class="chat-input">
+          <input type="text" id="user-input" placeholder="Digite sua pergunta">
+          <button id="send-btn">Enviar</button>
+        </div>
+      </div>
+ 
+
+</html>
